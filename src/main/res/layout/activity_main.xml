@@ -2,15 +2,36 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/success_people_back_v">
+    android:background="@drawable/login_back"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/successPeople"
+        android:layout_marginTop="15dp"
+        android:text="Успешные люди"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <GridView
+        android:layout_alignTop="@id/successPeople"
+        android:layout_marginTop="70dp"
         android:id="@+id/gridView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:horizontalSpacing="1dp"
+        android:layout_width="717dp"
+        android:layout_height="match_parent"
+        android:horizontalSpacing="5dp"
         android:numColumns="2"
-        android:verticalSpacing="1dp"
-        tools:ignore="MissingConstraints" />
+        android:verticalSpacing="13dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-230dp"
+        tools:layout_editor_absoluteY="-368dp" />
+
+    <Space
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"/>
 </RelativeLayout>

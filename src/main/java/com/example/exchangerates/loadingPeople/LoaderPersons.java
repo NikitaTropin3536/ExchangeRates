@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.exchangerates.Utils;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +25,6 @@ public class LoaderPersons {
     private final Context context;
 
     private final Handler handler;
-
-    /* адрес сервера */
-    private static final String BASE_URL = "http://192.168.1.67:8900/";
 
     /* список людей */
     private List<Person> persons = new ArrayList<>();
@@ -48,22 +47,13 @@ public class LoaderPersons {
     /* ссылки на источники с дополнительной информацией */
     private List<String> dopLinks = new ArrayList<>();
 
-    public LoaderPersons(Context context, Handler handler) {
+    public LoaderPersons(Context context,
+                         Handler handler) {
         this.context = context;
         this.handler = handler;
 
-        loadPeopleFromServer(persons); /* получаем наших людей */
-
-        goNames(persons);
-
-        /* заполняем данными списки имен, фоток и так далее */
-        loadPersonsData(persons,
-                personNames,
-                personPhotos,
-                personWhatDo,
-                personSummaries,
-                infoLinks,
-                dopLinks);
+        /* получаем наших людей */
+        loadPeopleFromServer(persons);
     }
 
     /**
@@ -72,7 +62,7 @@ public class LoaderPersons {
     public void loadPeopleFromServer(List<Person> persons) {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(Utils.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -95,10 +85,16 @@ public class LoaderPersons {
                     Toast.makeText(context, "Не достучаться до сервера",
                             Toast.LENGTH_SHORT).show();
                 }
-                List<Person> personList = response.body();
-                persons.addAll(personList);
 
-                /* отправляем handler - у сообщение */
+                List<Person> personList = response.body();
+                persons.addAll(personList); /* добавляем людей в список*/
+
+                /* заполняем данными списки имен, фоток и так далее */
+                loadPersonsData(persons, personNames, personPhotos,
+                        personWhatDo, personSummaries,
+                        infoLinks, dopLinks);
+
+                /* отправляем handler - у сообщение - мы закончили данными */
                 handler.sendEmptyMessage(1);
             }
 
@@ -111,7 +107,6 @@ public class LoaderPersons {
             }
         });
     }
-
 
     /* метод для загрузки данных этих людей в соответствующие списки */
     public void loadPersonsData(List<Person> persons,
@@ -216,11 +211,5 @@ public class LoaderPersons {
 
     public List<String> dopLinks() {
         return dopLinks;
-    }
-
-    private void goNames(List<Person> persons) {
-        for (Person person : persons) {
-            Log.v("PersonName: ", person.name());
-        }
     }
 }

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="180dp"
-    android:layout_height="230dp"
+    android:layout_width="220dp"
+    android:layout_height="265dp"
     android:layout_marginStart="20dp"
-    android:layout_marginTop="20dp"
+    android:layout_marginTop="40dp"
     app:cardCornerRadius="34dp"
-    app:cardElevation="7dp">
+    app:cardElevation="5dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/photoOnCard"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="205dp"
+        android:layout_height="140dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="18dp"
         android:contentDescription="Photo"
         android:src="@drawable/goward" />
 
@@ -22,10 +22,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="174dp"
         android:text="Говард Шульц"
         android:textColor="@color/black"
-        android:textSize="17sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
@@ -33,20 +33,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="204dp"
         android:gravity="center_horizontal"
         android:text="Бывший CEO Starbucks"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="italic" />
 
-    <ImageView
-        android:id="@+id/favouriteOnCard"
-        android:layout_width="46dp"
-        android:layout_height="46dp"
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="11dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginStart="58dp"
-        android:layout_marginTop="177dp"
-        android:contentDescription="Favourite"
-        android:src="@drawable/star" />
+        android:layout_marginTop="260dp" />
 </androidx.cardview.widget.CardView>

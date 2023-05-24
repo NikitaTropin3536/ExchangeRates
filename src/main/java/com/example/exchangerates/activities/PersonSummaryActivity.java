@@ -39,7 +39,7 @@ public class PersonSummaryActivity extends AppCompatActivity {
         /* забираем входящие данные */
         name.setText(intent.getStringExtra("name"));
 
-        photoUrl = intent.getStringExtra("photo");
+        photoUrl = intent.getStringExtra("photoUrl");
 
         /* устанавливаем фотографию */
         Glide.with(this)

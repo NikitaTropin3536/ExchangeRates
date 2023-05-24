@@ -7,17 +7,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
 import com.example.exchangerates.adapters.PersonsAdapter;
 import com.example.exchangerates.databinding.ActivityMainBinding;
 import com.example.exchangerates.loadingPeople.LoaderPersons;
-import com.example.exchangerates.loadingPeople.Person;
 import com.example.exchangerates.parsing.HumanBiographyParser;
-
-import java.util.ArrayList;
 
 /**
  * класс главной активности приложения
@@ -26,15 +22,15 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
-    /* парсер биографий */
-    private HumanBiographyParser parser;
+    private Handler handler;
 
     /* загрузчик людей */
     private LoaderPersons loaderPersons;
 
-    private Handler handler;
+    /* парсер биографий */
+    private HumanBiographyParser parser;
 
-    /* адаптер для крточек с людьми */
+    /* адаптер для карточек с людьми */
     private PersonsAdapter adapter;
 
     @Override
@@ -46,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
         handler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(@NonNull Message msg) {
-
-                Log.v("PersonNamesList", loaderPersons.personNames().toString());
 
                 /* создаем адаптер после загрузки данных */
                 adapter = new PersonsAdapter(
@@ -66,21 +60,38 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                loaderPersons = new LoaderPersons(getApplicationContext(), handler);
+                /* инициализируем loaderPersons */
+                loaderPersons = new LoaderPersons(
+                        getApplicationContext(),
+                        handler);
             }
         }).start();
 
         binding.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                /* переход на активнсоть с предисловием */
                 Intent intent = new Intent(
                         getApplicationContext(),
                         PersonSummaryActivity.class
                 );
 
-                intent.putExtra("name", loaderPersons.personNames().get(position));
-                intent.putExtra("photoUrl", loaderPersons.personPhotos().get(position));
-                intent.putExtra("summary", loaderPersons.personSummaries().get(position));
+                /**
+                 * "зашиваем" в intent данные:
+                 * name - имя человека,
+                 * photoUrl - url фотки человека,
+                 * summary - предисловие
+                 */
+                intent.putExtra("name", loaderPersons.personNames()
+                        .get(position));
+
+                intent.putExtra("photoUrl", loaderPersons.personPhotos()
+                        .get(position));
+
+                intent.putExtra("summary", loaderPersons.personSummaries()
+                        .get(position));
+
                 startActivity(intent);
             }
         });
@@ -117,5 +128,4 @@ public class MainActivity extends AppCompatActivity {
 ////        );
 ////        viewPager.setAdapter(adapter);
     }
-
 }

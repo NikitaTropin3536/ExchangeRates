@@ -2,15 +2,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/success_people_back">
+    android:layout_height="match_parent">
+
+    <Space
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"/>
 
     <GridView
         android:id="@+id/gridView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:horizontalSpacing="1dp"
+        android:layout_width="717dp"
+        android:layout_height="1466dp"
+        android:horizontalSpacing="14dp"
         android:numColumns="2"
-        android:verticalSpacing="1dp"
-        tools:ignore="MissingConstraints" />
+        android:verticalSpacing="26dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-230dp"
+        tools:layout_editor_absoluteY="-368dp" />
+
+    <Space
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"/>
 </RelativeLayout>

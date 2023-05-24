@@ -40,7 +40,7 @@ public class PersonsAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return personNames.size();
+        return personPhotos.size();
     }
 
     @Override
@@ -57,7 +57,7 @@ public class PersonsAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         @SuppressLint({"ViewHolder", "InflateParams"})
-        View view = LayoutInflater.from(convertView.getContext()).inflate(
+        View view = LayoutInflater.from(parent.getContext()).inflate(
                 R.layout.card_person, null
         );
 
@@ -70,6 +70,7 @@ public class PersonsAdapter extends BaseAdapter {
         Glide.with(context)
                 .load(personPhotos.get(position))
                 .into(photo);
+
         name.setText(personNames.get(position));
         whatDo.setText(whatDoList.get(position));
         return view;
